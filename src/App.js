@@ -1,79 +1,83 @@
 import './App.css';
-import OutlierGraph from './component/OutlierGraph';
+import OutlierIQRScatterChart from './final/outlier/OutlierIQRScatterChart ';
+import ScatterPlot from './component/ScatterPlot';
+import OutlierZScoreScatterChart from './final/outlier/OutlierZScoreScatterChart ';
+import OutlierKNNScatterChart from './final/outlier/OutlierKNNScatterChart';
 import TrendGraph from './component/TrendGraph';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import LinearTrendChart from './final/Trends/LinearTrendChart';
+import MovingAverageTrendChart from './final/Trends/MovingAverageTrendChart ';
+import SeasonalDecompositionChart from './component/SeasonalDecompositionChart ';
+
+
 function App() {
-  const data = [
-    { name: 'Jan', value: 30 },
-    { name: 'Feb', value: 25 },
-    { name: 'Mar', value: 40 },
-    { name: 'Apr', value: 35 },
-    { name: 'May', value: 45 },
-    { name: 'Jun', value: 155 },
-    { name: 'Jul', value: 50 },
-    { name: 'Aug', value: 60 },
-    { name: 'Sep', value: 55 },
-    { name: 'Oct', value: 45 },
-    { name: 'Nov', value: 35 },
-    { name: 'Dec', value: 40 },
-  ];
- 
-  const barData = [
-    { name: 'Jan', value: 20 },
-    { name: 'Feb', value: 35 },
-    { name: 'Mar', value: 45 },
-  ];
- 
-  const areaData = [
-    { name: 'Jan', value: 10 },
-    { name: 'Feb', value: 20 },
-    { name: 'Mar', value: 15 },
-  ];
-  
- 
+  const data = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   return (
 <div className="App">
-<TrendGraph
-    data={data}
-    width={600}
-    height={400}
-    windowSize={3}
-    margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
-    lineColor="#ff0000"
-    strokeWidth={2}
-    xAxisProps={{
-        dataKey: 'name',
-        label: { value: 'Month', position: 'insideBottomRight', offset: -10 }
-    }}
-    yAxisProps={{ label: { value: 'Value', angle: -90, position: 'insideLeft' } }}
-    cartesianGridProps={{ strokeDasharray: '3 3', vertical: false }}
-    tooltipProps={{ cursor: { stroke: 'red', strokeWidth: 2 } }}
-    legendProps={{ align: 'center', verticalAlign: 'top', height: 36 }}
-    lineProps={{ stroke: '#ff0000', strokeWidth: 2, dot: false }}
-/> 
-<ResponsiveContainer width="30%" height={400}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-      </LineChart>
-    </ResponsiveContainer>
+{/* <ScatterPlot/> */}
 
-    <OutlierGraph 
-                data={data} 
-                width={600} 
-                height={400} 
-                outlierRadius={8}
-                allPointRadius={4}
-                cartesianGridProps={{ strokeDasharray: '3 3' }}
-                xAxisProps={{ dataKey: 'name', label: { value: 'Month', position: 'insideBottomRight', offset: -10 } }}
-                yAxisProps={{ label: { value: 'Value', angle: -90, position: 'insideLeft' } }}
-                tooltipProps={{ cursor: { stroke: 'red', strokeWidth: 2 } }}
-                scatterProps={{ fill: 'blue' }}
-            />
+{/* <TrendGraph data={data}/> */}
+{/* Zscore
+<OutlierZScoreScatterChart
+  data={[
+    { x: 10, y: 20 },
+    { x: 20, y: 30 },
+    { x: 30, y: 500 },
+    { x: 40, y: 50 },
+    { x: 50, y: 60 },
+    { x: 70, y: 40 },
+    { x: 80, y: 900 },
+  ]}
+  keyX="x"
+  keyY="y"
+  threshold={0.7}
+  width="80%"
+  height={300}
+/>
+IQR
+
+<OutlierIQRScatterChart
+   data={[
+    { x: 'A', y: 20 },
+    { x: 'B', y: 30 },
+    { x: 'C', y: 500 },
+    { x: 'D', y: 50 },
+    { x: 'E', y: 60 },
+    { x: 'F', y: 40 },
+    { x: 'G', y: 900 },
+  ]}
+  keyX="x"
+  keyY="y"
+  kFactor={1.5}
+  width="80%"
+  height={300}
+/> */}
+{/* KNN */}
+{/* <OutlierKNNScatterChart
+  data={[
+    { x: 10, y: 20 },
+    { x: 20, y: 30 },
+    { x: 30, y: 500 },
+    { x: 40, y: 50 },
+    { x: 50, y: 60 },
+    { x: 70, y: 40 },
+    { x: 80, y: 900 },
+  ]}
+  keyX="x"
+  keyY="y"
+  kNearest={2}
+  threshold={30} 
+  width="80%"
+  height={300}
+/> */}
+
+
+<LinearTrendChart/>
+
+
+<MovingAverageTrendChart/>
+
+
+
 </div>
   );
 }

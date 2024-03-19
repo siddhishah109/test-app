@@ -18,7 +18,7 @@ function generateForecast(data, windowSize) {
 
 
 
-function TrendGraph({ data, windowSize = 2, xAxisProps = {}, yAxisProps = {}, cartesianGridProps = {}, tooltipProps = {}, legendProps = {}, lineProps = {}, ...rest }) {
+function TrendGraph({ data, windowSize = 3, xAxisProps = {}, yAxisProps = {}, cartesianGridProps = {}, tooltipProps = {}, legendProps = {}, lineProps = {}, ...rest }) {
     const forecastedData = generateForecast(data, windowSize);
 
     return (
