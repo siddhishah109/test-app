@@ -22,76 +22,23 @@ function App() {
 
   return (
 <div className="App">
-{/* <ScatterPlot/> */}
-
-{/* <TrendGraph data={data}/> */}
-{/* Zscore
-<OutlierZScoreScatterChart
-  data={[
-    { x: 10, y: 20 },
-    { x: 20, y: 30 },
-    { x: 30, y: 500 },
-    { x: 40, y: 50 },
-    { x: 50, y: 60 },
-    { x: 70, y: 40 },
-    { x: 80, y: 900 },
-  ]}
-  keyX="x"
-  keyY="y"
-  threshold={0.7}
-  width="80%"
-  height={300}
-/>
-IQR
-
-<OutlierIQRScatterChart
-   data={[
-    { x: 'A', y: 20 },
-    { x: 'B', y: 30 },
-    { x: 'C', y: 500 },
-    { x: 'D', y: 50 },
-    { x: 'E', y: 60 },
-    { x: 'F', y: 40 },
-    { x: 'G', y: 900 },
-  ]}
-  keyX="x"
-  keyY="y"
-  kFactor={1.5}
-  width="80%"
-  height={300}
-/> */}
-{/* KNN */}
-{/* <OutlierKNNScatterChart
-  data={[
-    { x: 10, y: 20 },
-    { x: 20, y: 30 },
-    { x: 30, y: 500 },
-    { x: 40, y: 50 },
-    { x: 50, y: 60 },
-    { x: 70, y: 40 },
-    { x: 80, y: 900 },
-  ]}
-  keyX="x"
-  keyY="y"
-  kNearest={2}
-  threshold={30} 
-  width="80%"
-  height={300}
-/> */}
+<MovingAverageTrendChart
+        data={data}
+        windowSize={3} 
+        originalLineColor="#8884d8"
+        movingAverageLineColor="#82ca9d"
+        showXAxis={true}
+        showYAxis={true}
+        showTooltip={true}
+        showLegend={true}
+      />
 
 
-{/* <LinearTrendChart/>
-
-
-<MovingAverageTrendChart/> */}
-
-<ExponentialSmoothingChart/>
 <LinearTrendChart
         data={data}
         dataKey="y"
         lineColor="#8884d8"
         trendLineColor="#82ca9d"
-        dot={true}
         showYAxis={true}
         showTooltip={true}
         showLegend={true}
