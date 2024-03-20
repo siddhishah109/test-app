@@ -1,32 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+// Load ARIMA module
 import ARIMA from 'arima';
+// Load Recharts
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import React, { useState, useEffect } from 'react';
 
-const ARIMAVisualization = ({ data }) => {
+// Function to fetch time series data (replace this with your actual data fetching logic)
+function fetchTimeSeriesData() {
+    return Array(24).fill(0).map((_, i) => i + Math.random() / 5);
+}
+
+const ARIMAVisualization = () => {
+  // State to store time series data and forecast
+  const [data, setData] = useState([]);
   const [forecast, setForecast] = useState([]);
 
+  // Fetch time series data and initialize ARIMA model on component mount
   useEffect(() => {
-    // Perform ARIMA forecasting
-    const model = new ARIMA({ data, method: 'MLE', p: 1, d: 1, q: 1 }); // ARIMA(1,1,1) model
-    const forecastValues = model.predict(10); // Forecasting 10 steps ahead
-    setForecast(forecastValues);
-  }, [data]);
+    // Fetch time series data
+    const tsData = fetchTimeSeriesData();
 
-  // Prepare data for Recharts
-  const chartData = data.map((value, index) => ({ time: index, actual: value }));
-  const forecastData = forecast.map((value, index) => ({ time: data.length + index, forecast: value }));
+    // Init ARIMA model and start training
+    const arima = new ARIMA({
+      p: 2,
+      d: 1,
+      q: 2,
+      verbose: false
+    }).train(tsData);
+
+    // Predict next 12 values
+    const [pred, _] = arima.predict(12);
+
+    // Update state with time series data and forecast
+    setData(tsData);
+    setForecast(pred);
+  }, []);
 
   return (
     <div>
-      <h2>ARIMA Forecast</h2>
-      <LineChart width={800} height={400} data={[...chartData, ...forecastData]}>
+      <h2>Time Series Data and Forecast Visualization</h2>
+      <LineChart width={800} height={400} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" label={{ value: 'Time', position: 'bottom' }} />
-        <YAxis label={{ value: 'Value', angle: -90, position: 'insideLeft' }} />
+        <XAxis dataKey="index" />
+        <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="actual" stroke="#8884d8" name="Actual Data" />
-        <Line type="monotone" dataKey="forecast" stroke="#82ca9d" name="Forecast" />
+        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+        <Line type="monotone" dataKey="forecast" stroke="#82ca9d" />
       </LineChart>
     </div>
   );

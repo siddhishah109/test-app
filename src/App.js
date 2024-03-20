@@ -7,10 +7,19 @@ import TrendGraph from './component/TrendGraph';
 import LinearTrendChart from './final/Trends/LinearTrendChart';
 import MovingAverageTrendChart from './final/Trends/MovingAverageTrendChart ';
 import SeasonalDecompositionChart from './component/SeasonalDecompositionChart ';
+import ExponentialSmoothingChart from './final/Trends/ExponentialSmoothingChart ';
+
 
 
 function App() {
-  const data = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+  const data = [
+    { x: 1, y: 2 },
+    { x: 2, y: 3 },
+    { x: 3, y: 5 },
+    { x: 4, y: 4 },
+    { x: 5, y: 6 }
+  ];
+
   return (
 <div className="App">
 {/* <ScatterPlot/> */}
@@ -71,10 +80,26 @@ IQR
 /> */}
 
 
-<LinearTrendChart/>
+{/* <LinearTrendChart/>
 
 
-<MovingAverageTrendChart/>
+<MovingAverageTrendChart/> */}
+
+<ExponentialSmoothingChart/>
+<LinearTrendChart
+        data={data}
+        dataKey="y"
+        lineColor="#8884d8"
+        trendLineColor="#82ca9d"
+        dot={true}
+        showYAxis={true}
+        showTooltip={true}
+        showLegend={true}
+        tooltipProps={{ formatter: (value) => `$${value}` }}
+        showOriginalLine={true}
+        lineProps={{ strokeWidth: 2 }}
+      />
+
 
 
 
