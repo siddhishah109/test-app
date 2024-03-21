@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter } from 'recharts';
+import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter,Legend } from 'recharts';
 
 const OutlierIQRScatterChart = ({ 
   data, 
@@ -34,6 +34,9 @@ const OutlierIQRScatterChart = ({
   outlierName = 'Outliers',
   originalDatafill = '#8884d8',
   outlierDataFill = '#ff7300',
+  legendProps = {},
+  showLegend = true,
+
   
 
 }) => {
@@ -65,6 +68,7 @@ const OutlierIQRScatterChart = ({
         {showXAxis && <XAxis dataKey={keyX} type="number" label={{value: xLabel, angle: xAxisAngle, dx: xAxisDx, dy: xAxisDy}} {...xAxisProps} />}
         {showYAxis && <YAxis dataKey={keyY} type="number"  label={{ value: yLabel, angle: yAxisAngle, dx: yAxisDx, dy: yAxisDy}} {...yAxisProps} />}
         {showTooltip && <Tooltip {...tooltipProps} />}
+        {showLegend && <Legend {...legendProps} />} 
         {showDataScatter && <Scatter  name={dataName} data={data} fill={originalDatafill}  {...scatterProps} />}
         {showOutliersScatter && <Scatter name={outlierName}  data={outliers} fill={outlierDataFill} {...outliersScatterProps} />}
       </ScatterChart>
