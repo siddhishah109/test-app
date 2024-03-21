@@ -17,7 +17,6 @@ const LinearTrendChart = ({
   yAxisDy=0,
   originallineColor = '#8884d8', 
   trendLineColor = '#82ca9d', 
-  dot = false, 
   showYAxis = true,
   showTooltip = true,
   showLegend = true,

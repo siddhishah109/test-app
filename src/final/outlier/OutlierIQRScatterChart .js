@@ -1,7 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter } from 'recharts';
 
-const OutlierIQRScatterChart = ({ data, keyX, keyY, kFactor, width = '80%', height = 300 }) => {
+const OutlierIQRScatterChart = ({ 
+  data, 
+  keyX='x', 
+  keyY='y', 
+  kFactor=0.4, 
+  width = 500, 
+  height = 300,
+  showCartesianGrid = false,
+  showXAxis = true,
+  showYAxis = true,
+  showTooltip = true,
+  showDataScatter = true,
+  showOutliersScatter = true,
+  xAxisProps = {},
+  yAxisProps = {},
+  cartesianGridProps = {},
+  tooltipProps = {},
+  scatterProps = {},
+  outliersScatterProps = {},
+  responsiveContainerProps = {},
+  scatterChartProps = {},
+  xAxisAngle=0,
+  xAxisDx=0,
+  xAxisDy=0,
+  xLabel='',
+  yAxisAngle=-90,
+  yAxisDx=0,
+  yAxisDy=0,
+  yLabel='',
+  dataName = 'Data',
+  outlierName = 'Outliers',
+  originalDatafill = '#8884d8',
+  outlierDataFill = '#ff7300',
+  
+
+}) => {
   const [outliers, setOutliers] = useState([]);
 
   useEffect(() => {
@@ -24,14 +59,14 @@ const OutlierIQRScatterChart = ({ data, keyX, keyY, kFactor, width = '80%', heig
   }, [data, keyY, kFactor]);
 
   return (
-    <ResponsiveContainer width={width} height={height}>
-      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-        <CartesianGrid />
-        <XAxis dataKey={keyX} type="number" />
-        <YAxis dataKey={keyY} type="number" />
-        <Tooltip />
-        <Scatter name="Data" data={data} fill="#8884d8" />
-        <Scatter name="Outliers" data={outliers} fill="#ff0000" />
+    <ResponsiveContainer width={width} height={height} {...responsiveContainerProps}>
+      <ScatterChart   {...scatterChartProps}>
+        {showCartesianGrid && <CartesianGrid {...cartesianGridProps} />}
+        {showXAxis && <XAxis dataKey={keyX} type="number" label={{value: xLabel, angle: xAxisAngle, dx: xAxisDx, dy: xAxisDy}} {...xAxisProps} />}
+        {showYAxis && <YAxis dataKey={keyY} type="number"  label={{ value: yLabel, angle: yAxisAngle, dx: yAxisDx, dy: yAxisDy}} {...yAxisProps} />}
+        {showTooltip && <Tooltip {...tooltipProps} />}
+        {showDataScatter && <Scatter  name={dataName} data={data} fill={originalDatafill}  {...scatterProps} />}
+        {showOutliersScatter && <Scatter name={outlierName}  data={outliers} fill={outlierDataFill} {...outliersScatterProps} />}
       </ScatterChart>
     </ResponsiveContainer>
   );
