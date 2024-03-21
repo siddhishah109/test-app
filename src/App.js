@@ -7,22 +7,24 @@ import TrendGraph from './component/TrendGraph';
 import LinearTrendChart from './final/Trends/LinearTrendChart';
 import MovingAverageTrendChart from './final/Trends/MovingAverageTrendChart ';
 import SeasonalDecompositionChart from './component/SeasonalDecompositionChart ';
+import ExponentialSmoothingChart from './final/Trends/ExponentialSmoothingChart ';
 
 
 
 
 function App() {
   const data = [
-    { x: 1, y: 2 },
-    { x: 2, y: 3 },
-    { x: 3, y: 5 },
-    { x: 4, y: 10 },
-    { x: 5, y: 6 }
-  ];
+    { time: 0, population: 10 },
+    { time: 1, population: 20 },
+    { time: 2, population: 40 },
+    { time: 3, population: 80 },
+    { time: 4, population: 160 },
+    // Add more data points as needed
+];
 
   return (
 <div className="App">
-<MovingAverageTrendChart
+{/* <MovingAverageTrendChart
         data={data}
         windowSize={3} 
         originalLineColor="#8884d8"
@@ -70,8 +72,9 @@ function App() {
   keyY="y"
   kFactor={0.4}
   tooltipProps={{ cursor: 'pointer' }}
-/>
+/> */}
 
+<ExponentialSmoothingChart data={data} alpha={0.2} xDataKey='time' dataKey='population'/>
 </div>
   );
 }
