@@ -8,6 +8,8 @@ import LinearTrendChart from './final/Trends/LinearTrendChart';
 import MovingAverageTrendChart from './final/Trends/MovingAverageTrendChart ';
 import SeasonalDecompositionChart from './component/SeasonalDecompositionChart ';
 import ExponentialSmoothingChart from './final/Trends/ExponentialSmoothingChart ';
+import ARIMAForecastComponent from './final/Forcasting/ARIMAForecastComponent';
+import SARIMAForecastComponent from './final/Forcasting/SARIMAForecastComponent';
 
 
 
@@ -21,6 +23,14 @@ function App() {
     { time: 4, population: 160 },
     // Add more data points as needed
 ];
+const userProvidedData = [
+  { time: "0ns", population: 10 },
+  { time: "e1", population: 20 },
+  { time: ' 2es', population: 40 },
+  { time: '3e', population: 80 },
+  { time: '4s', population: 160 }
+];
+
 
   return (
 <div className="App">
@@ -74,7 +84,25 @@ function App() {
   tooltipProps={{ cursor: 'pointer' }}
 /> */}
 
-<ExponentialSmoothingChart data={data} alpha={0.2} xDataKey='time' dataKey='population'/>
+<ExponentialSmoothingChart data={data} alpha={0.3} xDataKey='time' dataKey='population'/>
+
+<SARIMAForecastComponent
+                data={userProvidedData}
+                originalLineName="Original Data"
+                forecastLineName="Forecast"
+                xDataKey="time"
+                dataKey="population"
+          
+            />
+  <ARIMAForecastComponent
+                data={userProvidedData}
+      
+                xDataKey='time'
+                dataKey='population'
+             
+      
+        
+            />
 </div>
   );
 }
