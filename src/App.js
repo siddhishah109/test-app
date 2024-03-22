@@ -10,8 +10,9 @@ import SeasonalDecompositionChart from './component/SeasonalDecompositionChart '
 import ExponentialSmoothingChart from './final/Trends/ExponentialSmoothingChart ';
 import ARIMAForecastComponent from './final/Forcasting/ARIMAForecastComponent';
 import SARIMAForecastComponent from './final/Forcasting/SARIMAForecastComponent';
-import ACFPlot from './component/ACFPlot';
-import PACFPlot from './component/PACFPlot';
+import ACFPlot from './final/TS model/ACFPlot';
+import PACFPlot from './final/TS model/PACFPlot';
+import AutocorrelationCoeff from './final/TS model/AutocorrelationCoeff';
 
 
 
@@ -115,6 +116,8 @@ const customData = [1, 2, 3, 4, 5]; // Custom data for the ACF plot
       <PACFPlot data={customData}
     
         lag={2}/>
+
+        <AutocorrelationCoeff data={customData}  lag={4}/>
 </div>
   );
 }
