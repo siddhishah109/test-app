@@ -48,7 +48,7 @@ const SARIMAForecastComponent = ({
             try {
                 const populationData = data.map(entry => entry[dataKey]);
 
-                const response = await axios.post('http://localhost:5000/forecast/sarima', {
+                const response = await axios.post('http://siddhishah.pythonanywhere.com/forecast/sarima', {
                     data: populationData,
                     params: {
                         order: order,

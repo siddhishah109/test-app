@@ -48,7 +48,7 @@ const ARIMAForecastComponent = ({
                 try {
                     const populationData = data.map(entry => entry[dataKey]);
 
-                    const response = await axios.post('http://localhost:5000/forecast/arima', {
+                    const response = await axios.post('http://siddhishah.pythonanywhere.com/forecast/arima', {
                         data: populationData,
                         params: {
                             order: order,
