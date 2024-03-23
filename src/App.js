@@ -26,6 +26,13 @@ function App() {
     { time: 4, population: 160 },
     // Add more data points as needed
 ];
+const datas = [
+  { x: 1, y: 2 },
+  { x: 2, y: 3 },
+  { x: 3, y: 5 },
+  { x: 4, y: 10 },
+  { x: 5, y: 6 }
+];
 const userProvidedData = [
   { time: "0ns", population: 10 },
   { time: "e1", population: 20 },
@@ -39,34 +46,40 @@ const customData = [1, 2, 3, 4, 5]; // Custom data for the ACF plot
   const customBarFill = 'green';
   return (
 <div className="App">
-{/* <MovingAverageTrendChart
-        data={data}
-        windowSize={3} 
-        originalLineColor="#8884d8"
-        movingAverageLineColor="#82ca9d"
-        showXAxis={true}
-        showYAxis={true}
-        showTooltip={true}
-        showLegend={true}
-      />
-
-
+  <h2>Linear trend</h2>
 <LinearTrendChart
-        data={data}
+        data={datas}
         dataKey="y"
-        lineColor="#8884d8"
-        trendLineColor="#82ca9d"
+        // lineColor="#1e1b75"
+        // trendLineColor="#992e3e"
         showYAxis={true}
         showTooltip={true}
         showLegend={true}
         tooltipProps={{ formatter: (value) => `$${value}` }}
         showOriginalLine={true}
-        lineProps={{ strokeWidth: 2 }}
+        originalLineProps={{ strokeWidth: 1.5}}
       />
 
 
+<h2>Moving Average Trend</h2>
+<MovingAverageTrendChart
+        data={datas}
+        windowSize={3} 
+        dataKey="y"
+        // originalLineColor="#8884d8"
+        // movingAverageLineColor="#82ca9d"
+        showXAxis={true}
+        showYAxis={true}
+        showTooltip={true}
+        showLegend={true}
+      />
+<h2>Exponential Smoothing Trend</h2>
+
+<ExponentialSmoothingChart data={data} alpha={0.3} xDataKey='time' dataKey='population'/>
+<h2>Outlier by z-score</h2>
+
 <OutlierZScoreScatterChart
-  data={data}
+  data={datas}
   keyX="x"
   keyY="y"
   threshold={1.3}
@@ -74,22 +87,24 @@ const customData = [1, 2, 3, 4, 5]; // Custom data for the ACF plot
  
 />
 
+<h2>Outlier by KNN</h2>
 <OutlierKNNScatterChart
-  data={data}
+  data={datas}
   keyX="x"
   keyY="y"
   kNearest={3}
   threshold={5}
 />
+
+<h2>Outlier by IQR</h2>
 <OutlierIQRScatterChart
-  data={data}
+  data={datas}
   keyX="x"
   keyY="y"
   kFactor={0.4}
   tooltipProps={{ cursor: 'pointer' }}
-/> */}
-
-<ExponentialSmoothingChart data={data} alpha={0.3} xDataKey='time' dataKey='population'/>
+/>
+<h2>SARIMA Forcasting</h2>
 
 <SARIMAForecastComponent
                 data={userProvidedData}
@@ -97,8 +112,10 @@ const customData = [1, 2, 3, 4, 5]; // Custom data for the ACF plot
                 forecastLineName="Forecast"
                 xDataKey="time"
                 dataKey="population"
-          
+        
             />
+
+<h2>ARIMA Forcasting</h2>
   <ARIMAForecastComponent
                 data={userProvidedData}
       
@@ -108,15 +125,15 @@ const customData = [1, 2, 3, 4, 5]; // Custom data for the ACF plot
       
         
             />
-
+<h2>ACF plot</h2>
 <ACFPlot
         data={customData}
       />
-
+<h2>PACF Plot</h2>
       <PACFPlot data={customData}
     
         lag={2}/>
-
+<h2>Autocorrelation Coeff</h2>
         <AutocorrelationCoeff data={customData}  lag={4}/>
 </div>
   );

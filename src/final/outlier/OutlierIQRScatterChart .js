@@ -32,8 +32,8 @@ const OutlierIQRScatterChart = ({
   yLabel='',
   dataName = 'Data',
   outlierName = 'Outliers',
-  originalDatafill = '#8884d8',
-  outlierDataFill = '#ff7300',
+  originalDatafill = '#1e1b75',
+  outlierDataFill = '#db4259',
   legendProps = {},
   showLegend = true,
 
